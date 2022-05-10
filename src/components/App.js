@@ -1,6 +1,16 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
 function App() {
     return(
-        <>Hellow World!</>
+        <BrowserRouter >
+            <Routes>
+                <Route path='/'/>
+                <Route path='/products/:id'/>
+                <Route path='/cart' />
+                <Route path='/sign-up' />
+                <Route path='/sign-in' />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
