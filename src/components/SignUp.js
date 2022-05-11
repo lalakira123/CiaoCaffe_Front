@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import HeaderSignUp from './../assets/img/coffe-sign-up.png';
+import HeaderSignUp from './../assets/img/coffe-sign-up.svg';
 
 function SignUp() {
     const [signUp, setSignUp] = useState({name:'', email:'', password:'', confirmPassword:''});
@@ -73,7 +73,8 @@ const Imagem = styled.img`
     z-index: 0;
     position: absolute;
     top: 0;
-    width: 100%;
+    left: 0px;
+    width: 375px;
     height: 25%;
 `
 
