@@ -74,9 +74,6 @@ export default function Home(){
 }
 
 const Container = styled.div`
-    position: absolute;
-    top: 0px;
-    left: 0px;
     height: 100%;
     width: 100%;
     display: flex;
@@ -101,7 +98,8 @@ const Container = styled.div`
         }
         h1{
             color: #676367;
-            line-height: 3px;
+            line-height: 35px;
+            font-size: 40px;
         } 
         .caffe{
             color: #EFE3C8;
@@ -115,13 +113,13 @@ const Container = styled.div`
         }
     }
     main{
-        padding: 245px 0 79px 0;
+        padding: 145px 0 79px 0;
         display: flex;
         width: 375px;
         flex-wrap: wrap;
         justify-content: space-evenly;
         .product-box{
-            width: 143px;
+            width: 155px;
             height: 229px;
             border-radius: 10px;
             background-color: var(--boxColor);
@@ -133,7 +131,7 @@ const Container = styled.div`
             img{
                 position: absolute;
                 top: 15px;
-                width: 117px;
+                width: 127px;
                 height: 97px;
                 border-radius: 10px;
             }
@@ -141,12 +139,12 @@ const Container = styled.div`
                 position: absolute;
                 top: 115px;
                 color: #ffffff;
-                width: 117px;
+                width: 127px;
                 text-align: left;
                 font-size: 17px;
             }
             .price-box{
-                width: 121px;
+                width: 127px;
                 height: 39px;
                 border-radius: 10px;
                 background-color: var(--priceTag);
