@@ -1,10 +1,11 @@
 * {
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
     font-family: 'Ledger', serif;
-    background-color: #1C161E;
+    background-color: var(--backGroundColor);
 }
 
 a {
@@ -16,4 +17,12 @@ a {
 
 a:visited {
     color: #FFFFFF;
+}
+
+:root{
+    --backGroundColor: #1C161E;
+    --boxColor: #362C36;
+    --priceTag: #463D46;
+    --buttonColor: #EFE3C8;
+    --footerColor: #22151F; 
 }
