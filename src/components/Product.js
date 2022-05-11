@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import CartContext from './../contexts/CartContext';
 
 function Product() {
     const [infoProduct, setInfoProduct] = useState({});
@@ -9,7 +11,6 @@ function Product() {
 
     const navigate = useNavigate();
     const { id } = useParams();
-
     useEffect(() => {
         const promise = axios.get(`https://ciao-caffe.herokuapp.com/products/${id}`);
         promise.then((response) => {
@@ -22,7 +23,19 @@ function Product() {
         })
     },[]);
 
+    const { cart, setCart } = useContext(CartContext);
     function toCart() {
+        const produtoExiste = cart.find((product) => {
+            return product.name === infoProduct.name
+        });
+        if(!produtoExiste){
+            setCart([...cart, {
+                name: infoProduct.name,
+                type: infoProduct.type,
+                price: infoProduct.price.$numberDecimal,
+                quantity: 1
+            }]);
+        }
         navigate('/cart');
     }
 
