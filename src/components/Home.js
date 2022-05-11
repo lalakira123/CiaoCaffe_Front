@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const URLGET = "https://ciao-caffe.herokuapp.com/products"
@@ -56,14 +57,16 @@ export default function Home(){
                 <main>
                     {productsArray.map(product => {
                         return(
-                            <div className='product-box'>
-                                <img src={product.image} alt="product"/>
-                                <h2>{product.name}</h2>
-                                <div className="price-box">
-                                    <p>R$ {product.price.$numberDecimal}</p>
-                                    <div className="plus">+</div>
+                            <Link to={`/product/${product._id}`} key={product._id}>
+                                <div className="product-box" >
+                                    <img src={product.image} alt="product"/>
+                                    <h2>{product.name}</h2>
+                                    <div className="price-box">
+                                        <p>R${product.price.$numberDecimal}</p>
+                                        <div className="plus">+</div>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })}
                 </main>
@@ -134,6 +137,7 @@ const Container = styled.div`
                 width: 127px;
                 height: 97px;
                 border-radius: 10px;
+                object-fit: cover;
             }
             h2{
                 position: absolute;
@@ -170,6 +174,7 @@ const Container = styled.div`
                     background-color: var(--buttonColor);
                     font-size: 25px;
                     font-weight: bolder;
+                    color: #201520;
                 }
             }
         }
@@ -181,6 +186,7 @@ const Container = styled.div`
                 border-top-color: #ffffff;
                 border-radius: 50%;
                 margin: 15px;
+                margin-top: 180px;
             }
         @keyframes is-rotating {
             to {

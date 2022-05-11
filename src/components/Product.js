@@ -1,23 +1,61 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Product() {
-    return(
+    const [infoProduct, setInfoProduct] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const promise = axios.get(`https://ciao-caffe.herokuapp.com/products/${id}`);
+        promise.then((response) => {
+            const {data} = response;
+            setInfoProduct(data);
+            setLoading(false);
+        })
+        promise.catch((e) => {
+            console.log(e.message);
+        })
+    },[]);
+
+    function toCart() {
+        navigate('/cart');
+    }
+
+    const {name, type, image, price, description} = infoProduct;
+
+    return !loading ?(
         <Container>
-            <Imagem>imagem</Imagem>
+            <div>
+                <Imagem src={image}/>
+                <Link to='/'>
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </Link>
+            </div>
             <Details>
-                <Type>Cappuccino</Type>
-                <Name>Drizzled with caramel</Name>
-                <Description>Tudo o que há de bom em um cappuccino com muito caramelo e coisas boas para compartilhar</Description>
+                <Type>{type}</Type>
+                <Name>{name}</Name>
+                <Description>{description}</Description>
             </Details>
             <Buy>
                 <Price>
                     <p>Preço:</p>
-                    <Number>R$100</Number>
+                    <Number>R${price.$numberDecimal}</Number>
                 </Price>
-                <Button>Comprar</Button>
+                <Button onClick={toCart}>Comprar</Button>
             </Buy>
         </Container>
-    );
+    ) 
+    : ( <Container>
+            <main>
+                <div className='loading' />
+            </main>
+        </Container>
+        )
 }
 
 export default Product;
@@ -27,16 +65,47 @@ const Container = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 17px;
+    padding: 35px 17px 0px 17px;
     color: #FFFFFF;
+    main{
+        .loading {
+                animation: is-rotating 1s infinite;
+                width: 50px;
+                height: 50px;
+                border: 6px solid #1C161E;
+                border-top-color: #ffffff;
+                border-radius: 50%;
+                margin: 15px;
+                margin-top: 300px;
+            }
+        @keyframes is-rotating {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    }
+    div{
+        width: 343px;
+        position: relative;
+        ion-icon{
+            font-size: 50px;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: var(--buttonColor);
+            background-color: var(--boxColor);
+            border-radius: 100px;
+        }
+    }
 `
 
-const Imagem = styled.div`
+const Imagem = styled.img`
     width: 343px;
     height: 380px;
     background-color: #C4C4C4;
     border-radius: 40px;
     margin-bottom: 10px;
+    object-fit: cover;
 `
 
 const Details = styled.div`
@@ -63,7 +132,7 @@ const Buy = styled.section`
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
-    margin-top: 34px;
+    margin-top: 15px;
     width: 343px;
 `
 
