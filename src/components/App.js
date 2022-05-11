@@ -1,15 +1,21 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {useState} from 'react';
 
 import Home from "./Home";
 import SignUp from './SignUp';
 import Product from './Product';
 import SignIn from "./SignIn";
 
+import CartContext from './../contexts/CartContext';
+
 import './../assets/css/reset.css';
 import './../assets/css/style.css';
 
 function App() {
+    const [cart, setCart] = useState([]);
+
     return(
+        <CartContext.Provider value={{cart, setCart}}>
         <BrowserRouter >
             <Routes>
                 <Route path='/' element={<Home />} />
@@ -19,6 +25,7 @@ function App() {
                 <Route path='/sign-in' element={<SignIn />}/>
             </Routes>
         </BrowserRouter>
+        </CartContext.Provider>
     );
 }
 
