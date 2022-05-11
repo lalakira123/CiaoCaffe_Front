@@ -39,8 +39,6 @@ function Product() {
         navigate('/cart');
     }
 
-    console.log(cart);
-
     const {name, type, image, price, description} = infoProduct;
 
     return !loading ?(
