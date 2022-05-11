@@ -67,7 +67,7 @@ Para completar a compra será necessário fazer o login.</p>
                         required
                         />
                     <Button></Button>
-                    <Link to='/sign-in'>
+                    <Link to='/sign-up'>
                         <Login>Primeira vez? Cadastre-se!</Login>
                     </Link>
                 </Form>
