@@ -1,11 +1,24 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import HeaderSignUp from './../assets/img/coffe-sign-up.png';
 
 function SignUp() {
     const [signUp, setSignUp] = useState({name:'', email:'', password:'', confirmPassword:''});
+
+    function cadastrar(e){
+        e.preventDefault();
+        const promise = axios.post('https://ciao-caffe.herokuapp.com/signup', signUp);
+        promise.then((response) => {
+            const {data} = response;
+            console.log(data); 
+        })
+        promise.catch((e) => {
+            console.log(e.message);
+        })
+    }
 
     return(
         <>
@@ -15,7 +28,7 @@ function SignUp() {
                     <p>Ciao!</p>
                     <p>Cadastre-se para realizar a sua primeira compra!</p>
                 </CaixaBemVindo>
-                <Form>
+                <Form onSubmit={cadastrar}>
                     <Input 
                         placeholder='Nome'
                         onChange={(e) => setSignUp({...signUp, name: e.target.value})}
