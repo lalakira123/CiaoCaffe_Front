@@ -101,8 +101,8 @@ const Division = styled.div`
     @media (max-width: 800px){
         width: 343px;
         position: absolute;
-        top: 150px;
-        left: 2px;
+        top: 360px;
+        left: 20px;
         z-index: 3;
         ion-icon{
             font-size: 40px;

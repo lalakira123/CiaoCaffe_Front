@@ -74,10 +74,10 @@ function SignIn() {
                         type='password'
                         required
                         />
-                    <Button></Button>
-                    <Link to='/sign-up'>
-                        <Login>Primeira vez? Cadastre-se!</Login>
-                    </Link>
+                <Button></Button>
+                <Link to='/sign-up'>
+                    <Login>Primeira vez? Cadastre-se!</Login>
+                </Link>
                 </Form>
             </Container>
         </>
@@ -90,8 +90,8 @@ const Division = styled.div`
     @media (max-width: 800px){
         width: 343px;
         position: absolute;
-        top: 150px;
-        left: 2px;
+        top: 360px;
+        left: 20px;
         z-index: 3;
         ion-icon{
             font-size: 40px;
@@ -109,10 +109,10 @@ const Imagem = styled.img`
     z-index: 0;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 30%;
     @media (min-width: 800px){
-        width: 100%;
+        width: 100vw;
         height: 100%;
         object-fit: cover;
     }
