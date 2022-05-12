@@ -95,7 +95,7 @@ const Container = styled.main`
                 border-top-color: #ffffff;
                 border-radius: 50%;
                 margin: 15px;
-                margin-top: 300px;
+                margin-top: 160px;
             }
         @keyframes is-rotating {
             to {
