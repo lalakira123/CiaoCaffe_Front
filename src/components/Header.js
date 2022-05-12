@@ -17,7 +17,9 @@ function Header(){
                     <Link to='/cart'>
                         <ion-icon name="cart-outline"></ion-icon>
                     </Link>
-                    <ion-icon name="person-outline"></ion-icon>
+                    <Link to='/sign-in'>
+                        <ion-icon name="person-outline"></ion-icon>
+                    </Link>    
                 </nav>
                 <div className="circle"></div>
             </div>

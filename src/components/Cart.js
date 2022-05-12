@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 
 import CardProduct from './CardProduct';
+import FooterMobile from './FooterMobile';
 
 import CartContext from './../contexts/CartContext';
 
@@ -29,6 +30,7 @@ function Cart() {
                 })}
             </Space>
         </Conteiner>
+        <FooterMobile />
         </>
     );
 }
@@ -43,7 +45,7 @@ const Conteiner = styled.main`
     justify-content: center;
     color: #FFFFFF;
     @media (min-width: 800px){
-        margin-top: 100px;
+        margin-top: 110px;
     }
 `
 

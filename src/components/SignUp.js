@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import HeaderSignUp from './../assets/img/coffe-sign-up.svg';
+import HeaderSignUp from './../assets/img/coffe-sign-up.png';
 
 const POSTURL = 'https://ciao-caffe.herokuapp.com/signup';
 
@@ -44,7 +44,12 @@ function SignUp() {
     }
 
     return(
-        <>
+        <>  
+            <Division>
+                <Link to='/'>
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </Link>
+            </Division>
             <Imagem src={HeaderSignUp}/>
             <Container>
                 <CaixaBemVindo>
@@ -92,13 +97,32 @@ function SignUp() {
 
 export default SignUp;
 
+const Division = styled.div`
+    @media (max-width: 800px){
+        width: 343px;
+        position: absolute;
+        top: 150px;
+        left: 2px;
+        z-index: 3;
+        ion-icon{
+            font-size: 40px;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: var(--buttonColor);
+            background-color: var(--boxColor);
+            border-radius: 100px;
+        }
+    }
+`
+
 const Imagem = styled.img`
     z-index: 0;
     position: absolute;
     top: 0;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: 30%;
     @media (min-width: 800px){
         width: 100%;
         height: 100%;
