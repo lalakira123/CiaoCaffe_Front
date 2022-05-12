@@ -12,7 +12,7 @@ function Cart() {
         <Conteiner>
             <Titulo>Carrinho</Titulo>
             {cart.map((product) => {
-                const {image, name, type, price, quantity} = product;
+                const {image, name, type, price, realPrice, quantity} = product;
                 return(
                     <CardProduct
                         key={name}
@@ -20,6 +20,7 @@ function Cart() {
                         name={name}
                         type={type}
                         price={price}
+                        realPrice={realPrice}
                         quantity={quantity}
                         />
                 );

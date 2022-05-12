@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import CartContext from './../contexts/CartContext';
 
 function CardProduct(props) {
-    const {image, name, type, price, quantity} = props;
+    const {image, name, type, price, realPrice, quantity} = props;
     const [newQuantity, setNewQuantity] = useState(parseInt(quantity));
-    const [realPrice, setRealPrice] = useState(price);
+    const [newRealPrice, setRealPrice] = useState(realPrice);
     
     const {cart, setCart} = useContext(CartContext);
 
@@ -27,7 +27,7 @@ function CardProduct(props) {
                     name,
                     type,
                     price,
-                    realPrice,
+                    realPrice: newRealPrice,
                     quantity: newQuantity
                 }
             } else{
@@ -36,17 +36,17 @@ function CardProduct(props) {
         }) 
 
         setCart([...newCart]);
-    },[realPrice])
+    },[newRealPrice])
 
     function quantityChangePlus() {
         setNewQuantity(newQuantity + 1);
-        setRealPrice((parseFloat(realPrice) + parseFloat(price)).toFixed(2));
+        setRealPrice((parseFloat(newRealPrice) + parseFloat(price)).toFixed(2));
     }
 
     function quantityChangeMinus() {
         if(newQuantity > 1){
             setNewQuantity(newQuantity - 1);
-            setRealPrice((parseFloat(realPrice).toFixed(2) - parseFloat(price)).toFixed(2));
+            setRealPrice((parseFloat(newRealPrice).toFixed(2) - parseFloat(price)).toFixed(2));
         }
     }
 
@@ -56,7 +56,7 @@ function CardProduct(props) {
             <DetailsProduct>
                 <Type>{type}</Type>
                 <Name>{name}</Name>
-                <Price>R${realPrice}</Price>
+                <Price>R${newRealPrice}</Price>
             </DetailsProduct>
             <Quantity>
                 <Controller onClick={quantityChangeMinus}>-</Controller>
