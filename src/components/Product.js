@@ -80,7 +80,7 @@ const Container = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 35px 17px 35px 17px;
+    padding: 17px 17px 35px 17px;
     color: #FFFFFF;
     main{
         .loading {
