@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
 import HeaderSignIn from './../assets/img/coffe-sign-in.svg';
 
+const URLPOST = "https://ciao-caffe.herokuapp.com/signin";
+
 function SignIn() {
 
+    const navigate = useNavigate();
     const [signIn, setSignIn] = useState({
         email:'', 
         password:''
@@ -16,16 +19,16 @@ function SignIn() {
     function login(e){
         setLoading(true)
         e.preventDefault();
-        const promise = axios.post('https://ciao-caffe.herokuapp.com/signin', signIn);
+        const promise = axios.post(URLPOST, signIn);
         promise.then((response) => {
-            const {data} = response;
+            localStorage.setItem('token', response.data);
             setLoading(false);
-            console.log(data); 
-        })
+            navigate("/cart");
+        });
         promise.catch((e) => {
             console.log(e.message);
             setLoading(false);
-        })
+        });
     }
 
     function Button(){
@@ -67,7 +70,7 @@ function SignIn() {
                         required
                         />
                     <Button></Button>
-                    <Link to='/sign-in'>
+                    <Link to='/sign-up'>
                         <Login>Primeira vez? Cadastre-se!</Login>
                     </Link>
                 </Form>
