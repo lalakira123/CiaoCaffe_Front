@@ -80,7 +80,7 @@ const Container = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 17px 17px 35px 17px;
+    padding: 17px;
     color: #FFFFFF;
     main{
         .loading {
@@ -139,7 +139,7 @@ const Name = styled.p`
 `
 
 const Description = styled.p`
-    margin-bottom: 13px;
+    margin-bottom: 0px;
 `
 
 const Buy = styled.section`
