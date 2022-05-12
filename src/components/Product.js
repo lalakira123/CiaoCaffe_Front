@@ -34,6 +34,7 @@ function Product() {
                 name: infoProduct.name,
                 type: infoProduct.type,
                 price: infoProduct.price.$numberDecimal,
+                realPrice: infoProduct.price.$numberDecimal,
                 quantity: 1
             }]);
         }
