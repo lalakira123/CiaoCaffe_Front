@@ -7,6 +7,7 @@ import SignUp from './SignUp';
 import Product from './Product';
 import SignIn from "./SignIn";
 import Cart from './Cart';
+import Footer from './Footer';
 
 import CartContext from './../contexts/CartContext';
 
@@ -26,7 +27,8 @@ function App() {
                 <Route path='/cart' element={<Cart />}/>
                 <Route path='/sign-up' element={<SignUp />} />
                 <Route path='/sign-in' element={<SignIn />}/>
-            </Routes>
+            </Routes> 
+            <Footer />
         </BrowserRouter>
         </CartContext.Provider>
     );

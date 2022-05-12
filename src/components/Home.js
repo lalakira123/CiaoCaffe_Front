@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import HeaderMobile from './HeaderMobile';
+import FooterMobile from './FooterMobile';
 
 const URLGET = "https://ciao-caffe.herokuapp.com/products"
 
@@ -33,15 +34,16 @@ export default function Home(){
                     <main>
                         <div className='loading' />
                     </main>
-                    <footer></footer>
                 </Container>
+                <FooterMobile />
             </>
         )
     }
     if(!loading){
         return(
-            <Container>
-                <HeaderMobile /> 
+            <>
+            <HeaderMobile />
+            <Container> 
                 <main>
                     {productsArray.map(product => {
                         return(
@@ -58,8 +60,9 @@ export default function Home(){
                         )
                     })}
                 </main>
-                <footer></footer>
             </Container>
+            <FooterMobile />
+            </>
         )
     }
 }
@@ -151,13 +154,6 @@ const Container = styled.div`
                 transform: rotate(1turn);
             }
         }
-    }
-    footer{
-        height: 69px;
-        width: 100%;
-        position: fixed;
-        bottom: 0px;
-        background-color:var(--footerColor);
     }
     @media (min-width: 700px){
         main{

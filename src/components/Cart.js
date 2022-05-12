@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 
 import CardProduct from './CardProduct';
+import FooterMobile from './FooterMobile';
 
 import CartContext from './../contexts/CartContext';
 
@@ -70,6 +71,7 @@ function Cart() {
                 <Button></Button>
             </Space>
         </Conteiner>
+        <FooterMobile />
         </>
     );
 }
@@ -84,7 +86,7 @@ const Conteiner = styled.main`
     justify-content: center;
     color: #FFFFFF;
     @media (min-width: 800px){
-        margin-top: 100px;
+        margin-top: 110px;
     }
     .total{
         display: flex;
