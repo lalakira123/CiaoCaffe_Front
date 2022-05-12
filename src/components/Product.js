@@ -30,6 +30,7 @@ function Product() {
         });
         if(!produtoExiste){
             setCart([...cart, {
+                image: infoProduct.image,
                 name: infoProduct.name,
                 type: infoProduct.type,
                 price: infoProduct.price.$numberDecimal,

@@ -49,7 +49,7 @@ function SignIn() {
             <Container>
                 <CaixaBemVindo>
                     <p>Ciao!<br/> Seja bem-vindo!
-Para completar a compra será necessário fazer o login.</p>
+                        Para completar a compra será necessário fazer o login.</p>
                 </CaixaBemVindo>
                 <Form onSubmit={login}>
                     <Input 
