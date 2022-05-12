@@ -9,23 +9,27 @@ function Cart() {
     const {cart} = useContext(CartContext);
 
     return(
+        <>
         <Conteiner>
             <Titulo>Carrinho</Titulo>
-            {cart.map((product) => {
-                const {image, name, type, price, realPrice, quantity} = product;
-                return(
-                    <CardProduct
-                        key={name}
-                        image={image}
-                        name={name}
-                        type={type}
-                        price={price}
-                        realPrice={realPrice}
-                        quantity={quantity}
-                        />
-                );
-            })}
+            <Space>
+                {cart.map((product) => {
+                    const {image, name, type, price, realPrice, quantity} = product;
+                    return(
+                        <CardProduct
+                            key={name}
+                            image={image}
+                            name={name}
+                            type={type}
+                            price={price}
+                            realPrice={realPrice}
+                            quantity={quantity}
+                            />
+                    );
+                })}
+            </Space>
         </Conteiner>
+        </>
     );
 }
 
@@ -38,6 +42,24 @@ const Conteiner = styled.main`
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
+    @media (min-width: 800px){
+        margin-top: 100px;
+    }
+`
+
+const Space = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 800px){
+        width: 375px;
+        height: 450px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        border-radius: 10px;
+        border: 5px solid #171017;
+        background-color: #171017;
+    }   
 `
 
 const Titulo = styled.h1`

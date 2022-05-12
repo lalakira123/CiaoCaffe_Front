@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import HeaderMobile from './HeaderMobile';
+
 const URLGET = "https://ciao-caffe.herokuapp.com/products"
 
 export default function Home(){
@@ -25,35 +27,21 @@ export default function Home(){
     
     if(loading){
         return(
-            <Container>
-                <header>
-                    <div className="centralizer">
-                        <div className="logo">
-                            <h1>ciao</h1>
-                            <h1 className="caffe">Caffè</h1>
-                        </div>
-                        <div className="circle"></div>
-                    </div>
-                </header>
-                <main>
-                    <div className='loading' />
-                </main>
-                <footer></footer>
-            </Container>
+            <>
+                <HeaderMobile />
+                <Container>
+                    <main>
+                        <div className='loading' />
+                    </main>
+                    <footer></footer>
+                </Container>
+            </>
         )
     }
     if(!loading){
         return(
             <Container>
-                <header>
-                    <div className="centralizer">
-                        <div className="logo">
-                            <h1>ciao</h1>
-                            <h1 className="caffe">Caffè</h1>
-                        </div>
-                        <div className="circle"></div>
-                    </div>
-                </header>
+                <HeaderMobile /> 
                 <main>
                     {productsArray.map(product => {
                         return(
@@ -83,38 +71,6 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    header{
-        height: 145px;
-        width: 100%;
-        position: fixed;
-        top: 0px;
-        background-color: var(--backGroundColor);
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        .centralizer{
-            width: 375px;
-            height: 100%;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        h1{
-            color: #676367;
-            line-height: 35px;
-            font-size: 40px;
-        } 
-        .caffe{
-            color: #EFE3C8;
-            margin-left: 10px;
-        }
-        .circle{
-            width: 55px;
-            height: 54px;
-            border-radius: 100px;
-            background-color: #E38B38;
-        }
-    }
     main{
         padding: 145px 0 79px 0;
         display: flex;
@@ -146,6 +102,7 @@ const Container = styled.div`
                 width: 127px;
                 text-align: left;
                 font-size: 17px;
+                margin-top: 5px;
             }
             .price-box{
                 width: 127px;
@@ -158,8 +115,9 @@ const Container = styled.div`
                 bottom: 15px;
                 z-index: 0;
                 p{
-                    padding-left: 5px;
+                    padding-left: 15px;
                     color: #ffffff;
+                    font-weight: 700;
                 }
                 .plus{
                     width: 41px;
@@ -200,5 +158,10 @@ const Container = styled.div`
         position: fixed;
         bottom: 0px;
         background-color:var(--footerColor);
+    }
+    @media (min-width: 700px){
+        main{
+            width: 50%;
+        }
     }
 `

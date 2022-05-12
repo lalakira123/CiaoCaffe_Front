@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useState} from 'react';
 
+import Header from './Header';
 import Home from "./Home";
 import SignUp from './SignUp';
 import Product from './Product';
@@ -18,6 +19,7 @@ function App() {
     return(
         <CartContext.Provider value={{cart, setCart}}>
         <BrowserRouter >
+            <Header/>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/product/:id' element={<Product />} />  
