@@ -44,6 +44,7 @@ function Product() {
     const {name, type, image, price, description} = infoProduct;
 
     return !loading ?(
+        <>
         <Container>
             <div>
                 <Imagem src={image}/>
@@ -55,21 +56,24 @@ function Product() {
                 <Type>{type}</Type>
                 <Name>{name}</Name>
                 <Description>{description}</Description>
+                <Buy>
+                    <Price>
+                        <p>Preço:</p>
+                        <Number>R${price.$numberDecimal}</Number>
+                    </Price>
+                    <Button onClick={toCart}>Comprar</Button>
+                </Buy>
             </Details>
-            <Buy>
-                <Price>
-                    <p>Preço:</p>
-                    <Number>R${price.$numberDecimal}</Number>
-                </Price>
-                <Button onClick={toCart}>Comprar</Button>
-            </Buy>
         </Container>
+        </>
     ) 
-    : ( <Container>
+    : ( <>
+        <Container>
             <main>
                 <div className='loading' />
             </main>
         </Container>
+        </>
         )
 }
 
@@ -112,6 +116,10 @@ const Container = styled.main`
             border-radius: 100px;
         }
     }
+    @media (min-width: 800px){
+        margin-top: 150px;
+        flex-direction: row;
+    }
 `
 
 const Imagem = styled.img`
@@ -127,6 +135,9 @@ const Details = styled.div`
     width: 343px;
     font-size: 16px;
     line-height: 23px;
+    @media (min-width: 800px){
+        margin-left: 20px;
+    }
 `
 
 const Type = styled.p`

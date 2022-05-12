@@ -74,8 +74,13 @@ const Imagem = styled.img`
     position: absolute;
     top: 0;
     left: 0px;
-    width: 375px;
-    height: 25%;
+    width: 100%;
+    height: 50%;
+    @media (min-width: 800px){
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `
 
 const Container = styled.section`
@@ -89,6 +94,9 @@ const Container = styled.section`
     border-radius: 61px 61px 0px 0px;
     z-index: 1;
     position: relative;
+    @media (min-width: 800px){
+        opacity: 85%;
+    }
 `
 
 const CaixaBemVindo = styled.div`
