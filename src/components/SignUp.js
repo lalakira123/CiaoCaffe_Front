@@ -1,23 +1,46 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
 import HeaderSignUp from './../assets/img/coffe-sign-up.svg';
 
+const POSTURL = 'https://ciao-caffe.herokuapp.com/signup';
+
 function SignUp() {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [signUp, setSignUp] = useState({name:'', email:'', password:'', confirmPassword:''});
 
     function cadastrar(e){
+        setLoading(true);
         e.preventDefault();
-        const promise = axios.post('https://ciao-caffe.herokuapp.com/signup', signUp);
+        const promise = axios.post(POSTURL, signUp);
         promise.then((response) => {
-            const {data} = response;
-            console.log(data); 
+            setLoading(false);
+            alert("Ciao! Contra criada com sucesso!");
+            navigate("/sign-in");
         })
         promise.catch((e) => {
+            alert("Erro ao criar a conta!")
+            setLoading(false);
             console.log(e.message);
         })
+    }
+
+    function Button(){
+        if(!loading){
+            return(
+                <button type='submit'>Cadastrar</button>
+            )
+        }
+        if(loading){
+            return(
+                <button>
+                    <div className='loading' />
+                </button>        
+            )
+        }
     }
 
     return(
@@ -57,7 +80,7 @@ function SignUp() {
                         type='password'
                         required
                         />
-                    <Button type='submit'>Cadastrar</Button>
+                    <Button></Button>
                     <Link to='/sign-in'>
                         <Login>Já possui uma conta?</Login>
                     </Link>
@@ -104,6 +127,35 @@ const Form = styled.form`
     flex-direction: column;
     margin-top: 20px;
     margin-left: 100px;
+    button{
+        margin-top: 33px;
+        border: none;
+        border-radius: 10px;
+        background-color: #EFE3C8;
+        width: 156px;
+        height: 44px;
+        color: #4A2B29;
+        font-size: 20px;
+        font-weight: 700;
+        font-family: 'Ledger', serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .loading {
+        animation: is-rotating 1s infinite;
+        width: 25px;
+        height: 25px;
+        border: 4px solid var(--buttonColor);
+        border-top-color: var(--backGroundColor);
+        border-radius: 50%;
+        margin: 15px;
+    }
+    @keyframes is-rotating {
+        to {
+            transform: rotate(1turn);
+        }
+    }
 `
 
 const Input = styled.input`
@@ -118,19 +170,6 @@ const Input = styled.input`
         color: #FFFFFF;
         font-family: 'Ledger', serif;
     }
-`
-
-const Button = styled.button`
-    margin-top: 33px;
-    border: none;
-    border-radius: 10px;
-    background-color: #EFE3C8;
-    width: 156px;
-    height: 44px;
-    color: #4A2B29;
-    font-size: 20px;
-    font-weight: 700;
-    font-family: 'Ledger', serif;
 `
 
 const Login = styled.p`
