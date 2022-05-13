@@ -16,6 +16,7 @@ function CardProduct(props) {
                 return product.name !== name;
             })
             setCart([...newCart]);
+            localStorage.setItem('cart', JSON.stringify([...newCart]));
         }
     }
 
@@ -36,6 +37,7 @@ function CardProduct(props) {
         }) 
 
         setCart([...newCart]);
+        localStorage.setItem('cart', JSON.stringify([...newCart]));
     },[newRealPrice])
 
     function quantityChangePlus() {

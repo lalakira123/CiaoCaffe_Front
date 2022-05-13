@@ -28,15 +28,17 @@ function Product() {
         const produtoExiste = cart.find((product) => {
             return product.name === infoProduct.name
         });
+        const novoProduto = {
+            image: infoProduct.image,
+            name: infoProduct.name,
+            type: infoProduct.type,
+            price: infoProduct.price.$numberDecimal,
+            realPrice: infoProduct.price.$numberDecimal,
+            quantity: 1
+        }
         if(!produtoExiste){
-            setCart([...cart, {
-                image: infoProduct.image,
-                name: infoProduct.name,
-                type: infoProduct.type,
-                price: infoProduct.price.$numberDecimal,
-                realPrice: infoProduct.price.$numberDecimal,
-                quantity: 1
-            }]);
+            setCart([...cart, novoProduto]);
+            localStorage.setItem('cart', JSON.stringify([...cart, novoProduto]));
         }
         navigate('/cart');
     }
