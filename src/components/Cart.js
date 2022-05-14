@@ -14,6 +14,7 @@ const POSTURL = 'https://ciao-caffe.herokuapp.com/sales';
 const token = localStorage.getItem("token")
 
 function Cart() {
+    
     const {cart} = useContext(CartContext);
     const [validateToken, setValidateToken] = useState(false);
     const [total, setTotal] = useState(0);
@@ -27,7 +28,7 @@ function Cart() {
         city: '',
         state: ''
     });
-  
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -64,7 +65,10 @@ function Cart() {
             soma += Number(cart[i].realPrice)
         }
         setTotal(soma.toFixed(2));
+        setSale({...sale, total: soma.toFixed(2)})
     }, [cart]) 
+
+    console.log(sale)
 
     function postSale(){
         if(cart.length !== 0){
