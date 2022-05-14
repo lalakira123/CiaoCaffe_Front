@@ -67,7 +67,7 @@ function Cart() {
     function postSale(){
         axios.post(POSTURL, sale, {headers: {
             token
-        }})
+        }}).then(res => alert(res.data)).catch(err => alert(err))
     }
 
     function Button(){
