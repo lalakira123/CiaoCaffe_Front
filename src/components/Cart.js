@@ -259,6 +259,19 @@ const Detail = styled.div`
     margin-left: 20px;
 `
 
+const Division = styled.div`
+    @media (min-width: 800px){
+        display: flex;
+    }
+`
+
+const Detail = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+`
+
 const Space = styled.div`
     display: flex;
     flex-direction: column;
