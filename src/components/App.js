@@ -15,7 +15,12 @@ import './../assets/css/reset.css';
 import './../assets/css/style.css';
 
 function App() {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(localDataCart);
+
+    function localDataCart() {
+        const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        if(localCart) return localCart;
+    }
 
     return(
         <CartContext.Provider value={{cart, setCart}}>
