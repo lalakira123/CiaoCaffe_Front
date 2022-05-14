@@ -261,13 +261,6 @@ const Conteiner = styled.main`
     }
 `
 
-const Detail = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20px;
-`
-
 const Division = styled.div`
     @media (min-width: 800px){
         display: flex;
