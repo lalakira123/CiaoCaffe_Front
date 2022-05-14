@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useContext, useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import Swal from 'sweetalert2';
 
 import CardProduct from './CardProduct';
 import FooterMobile from './FooterMobile';
@@ -26,6 +27,8 @@ function Cart() {
         city: '',
         state: ''
     });
+  
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(sale.cep.length === 8){
@@ -47,7 +50,6 @@ function Cart() {
         }
     }, [sale.cep])
     
-
     useEffect(() => {
         if(token){
             setValidateToken(true);
@@ -65,27 +67,33 @@ function Cart() {
     }, [cart]) 
 
     function postSale(){
-        axios.post(POSTURL, sale, {headers: {
-            token
-        }})
+        if(cart.length !== 0){
+            axios.post(POSTURL, sale, {headers: {
+                token
+            }}).then(res => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ciao!',
+                    text: 'Compra realizada com sucesso!'
+                  })
+                navigate('/');
+            })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Não foi possível efetuar o pagamento!',
+                      })
+                })
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Ciao!',
+                text: 'Carrinho vazio!'
+              })
+        }
     }
 
-    function Button(){
-        if(!validateToken){
-            return(
-                <Link to={"/sign-in"}>
-                    <button>Faça o login!</button>
-                </Link>
-            )
-        }
-        if(validateToken){
-            return(
-                <>
-                    <button onClick={() => postSale()}>Pagar</button>
-                </>   
-            )
-        }
-    };
     return(
         <>
         <Conteiner>
@@ -162,7 +170,15 @@ function Cart() {
                             required
                         ></input>
                     </form>
-                    <Button/>
+                    {  !validateToken ? 
+                        <Link to={"/sign-in"}>
+                            <button>Faça o login!</button>
+                        </Link>
+                        :
+                        <>
+                            <button onClick={() => postSale()}>Pagar</button>
+                        </>   
+                    }
                 </Detail>
             </Division>
         </Conteiner>
@@ -242,13 +258,6 @@ const Conteiner = styled.main`
         }.adress-number{
             width: 78px;
         }
-    }
-    
-`
-
-const Division = styled.div`
-    @media (min-width: 800px){
-        display: flex;
     }
 `
 
