@@ -27,6 +27,7 @@ function Cart() {
         city: '',
         state: ''
     });
+  
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -258,7 +259,13 @@ const Conteiner = styled.main`
             width: 78px;
         }
     }
-    
+`
+
+const Detail = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
 `
 
 const Division = styled.div`
