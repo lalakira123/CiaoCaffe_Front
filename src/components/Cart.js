@@ -225,6 +225,8 @@ const Conteiner = styled.main`
         border-radius: 10px;
         color: var(--boxColor);
         font-size: 24px;
+        font-family: 'Ledger', serif;
+        font-weight: 700;
     }
     h4{
         font-size:  25px;

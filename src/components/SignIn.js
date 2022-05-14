@@ -186,6 +186,7 @@ const Input = styled.input`
     color: #FFFFFF;
     font-size: 20px;
     margin-bottom: 10px;
+    font-family: 'Ledger', serif;
     &::placeholder {
         color: #FFFFFF;
         font-family: 'Ledger', serif;
