@@ -137,7 +137,7 @@ const Container = styled.section`
     width: 100vw;
     height: calc(100vh - 127px);
     background-color: #1C161E;
-    margin-top: 127px;
+    margin-top: 100px;
     border-radius: 61px 61px 0px 0px;
     z-index: 1;
     position: relative;

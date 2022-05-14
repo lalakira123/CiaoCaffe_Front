@@ -90,26 +90,28 @@ function Cart() {
         <>
         <Conteiner>
             <Titulo>{validateToken? "Checkout" : "Carrinho"}</Titulo>
-            <Space>
-                {cart.map((product) => {
-                    const {image, name, type, price, realPrice, quantity} = product;
-                    return(
-                        <CardProduct
-                            key={name}
-                            image={image}
-                            name={name}
-                            type={type}
-                            price={price}
-                            realPrice={realPrice}
-                            quantity={quantity}
-                            />
-                    );
-                })}
-                <div className='total'>
-                    <h1>Total</h1>
-                    <h1>R${total}</h1>
-                </div>
-                <h4> Para onde deseja enviar?</h4> 
+            <Division>
+                <Space>
+                    {cart.map((product) => {
+                        const {image, name, type, price, realPrice, quantity} = product;
+                        return(
+                            <CardProduct
+                                key={name}
+                                image={image}
+                                name={name}
+                                type={type}
+                                price={price}
+                                realPrice={realPrice}
+                                quantity={quantity}
+                                />
+                        );
+                    })}
+                </Space>
+                <Detail>
+                    <div className='total'>
+                        <h1>Total</h1>
+                        <h1>R${total}</h1>
+                    </div>
                     <form>
                         <input  
                             className='cep'
@@ -160,8 +162,9 @@ function Cart() {
                             required
                         ></input>
                     </form>
-                <Button></Button>
-            </Space>
+                    <Button/>
+                </Detail>
+            </Division>
         </Conteiner>
         <FooterMobile />
         </>
@@ -177,6 +180,9 @@ const Conteiner = styled.main`
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
+    @media (max-width: 800px) {
+        margin-bottom: 80px;
+    }
     @media (min-width: 800px){
         margin-top: 110px;
     }
@@ -240,16 +246,29 @@ const Conteiner = styled.main`
     
 `
 
+const Division = styled.div`
+    @media (min-width: 800px){
+        display: flex;
+    }
+`
+
+const Detail = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+`
+
 const Space = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     @media (min-width: 800px){
         width: 375px;
-        height: 450px;
+        height: 400px;
         overflow-y: scroll;
         overflow-x: hidden;
-        border-radius: 10px;
+        border-radius: 40px;
         border: 5px solid #171017;
         background-color: #171017;
     }   
