@@ -1,7 +1,34 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const URLSIGNOUT = "https://ciao-caffe.herokuapp.com/signout";
+
+const token = localStorage.getItem("token");
 
 function FooterMobile() {
+
+    const [validateToken, setValidateToken] = useState(false);
+
+    useEffect(() => {
+        if(token){
+            setValidateToken(true);
+        } else{
+            setValidateToken(false);
+        }
+    }, [])
+
+    function signOut(){
+        let promise = axios.delete(URLSIGNOUT, {headers: {token}});
+        promise.then(res => {
+            localStorage.clear();
+            setValidateToken(false)
+            alert(res.data)
+            window.location.reload()
+        }).catch(err => console.log(err))
+    }
+
     return(
         <Container>
             <footer>
@@ -12,9 +39,14 @@ function FooterMobile() {
                     <Link to='/cart'>
                         <ion-icon name="cart-outline"></ion-icon>
                     </Link>
-                    <Link to='/sign-in' >
-                        <ion-icon name="person-outline"></ion-icon>
-                    </Link>
+                    {validateToken? 
+                        <ion-icon onClick={() => {signOut()}} name="log-out-outline"></ion-icon>
+                        :
+                        <Link to='/sign-in' >
+                            <ion-icon name="person-outline"></ion-icon>
+                        </Link>
+                    }
+                    
                 </div>
             </footer>
         </Container>

@@ -11,7 +11,7 @@ import axios from 'axios';
 
 const POSTURL = 'https://ciao-caffe.herokuapp.com/sales';
 
-const token = localStorage.getItem("token")
+const token = localStorage.getItem("token");
 
 function Cart() {
     
@@ -68,9 +68,8 @@ function Cart() {
         setSale({...sale, total: soma.toFixed(2)})
     }, [cart]) 
 
-    console.log(sale)
-
-    function postSale(){
+    function postSale(e){
+        e.preventDefault();
         if(cart.length !== 0){
             axios.post(POSTURL, sale, {headers: {
                 token
@@ -124,7 +123,7 @@ function Cart() {
                         <h1>Total</h1>
                         <h1>R${total}</h1>
                     </div>
-                    <form>
+                    <form onSubmit={postSale}>
                         <input  
                             className='cep'
                             placeholder='CEP'
@@ -173,16 +172,16 @@ function Cart() {
                             type='text'
                             required
                         ></input>
-                    </form>
                     {  !validateToken ? 
                         <Link to={"/sign-in"}>
                             <button>Faça o login!</button>
                         </Link>
                         :
                         <>
-                            <button onClick={() => postSale()}>Pagar</button>
+                            <button type='submit'>Pagar</button>
                         </>   
                     }
+                    </form>
                 </Detail>
             </Division>
         </Conteiner>

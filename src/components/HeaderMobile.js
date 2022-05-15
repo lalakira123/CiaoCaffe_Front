@@ -10,7 +10,9 @@ function Header(){
                     <h1>ciao</h1>
                     <h1 className="caffe">Caffè</h1>
                 </div>
-                <div className="circle"></div>
+                <div className="circle">
+                    <ion-icon name="cafe"></ion-icon>
+                </div>
             </div>
         </header>
         </Container>
@@ -56,7 +58,14 @@ const Container = styled.div`
             height: 54px;
             border-radius: 100px;
             background-color: #E38B38;
-        }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            ion-icon{
+                color: black;
+                font-size: 30px;
+            }
+    }    
     }
     @media (min-width: 800px){
         display: none;

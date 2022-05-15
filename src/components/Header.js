@@ -1,7 +1,34 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import {useEffect, useState} from "react";
+import axios from 'axios';
+
+const URLSIGNOUT = "https://ciao-caffe.herokuapp.com/signout";
+
+let token = localStorage.getItem("token");
 
 function Header(){
+
+    const [validateToken, setValidateToken] = useState(false);
+
+    useEffect(() => {
+        if(token){
+            setValidateToken(true);
+        } else{
+            setValidateToken(false);
+        }
+    }, [validateToken])
+
+    function signOut(){
+        let promise = axios.delete(URLSIGNOUT, {headers: {token}});
+        promise.then(res => {
+            localStorage.clear();
+            setValidateToken(false)
+            alert(res.data)
+            window.location.reload()
+        }).catch(err => console.log(err))
+    }
+
     return(
         <Container>
         <header>
@@ -17,11 +44,17 @@ function Header(){
                     <Link to='/cart'>
                         <ion-icon name="cart-outline"></ion-icon>
                     </Link>
-                    <Link to='/sign-in'>
-                        <ion-icon name="person-outline"></ion-icon>
-                    </Link>    
+                    {validateToken?
+                        <ion-icon onClick={() => signOut()} name="log-out-outline"></ion-icon>
+                        :
+                        <Link to='/sign-in' >
+                            <ion-icon name="person-outline"></ion-icon>
+                        </Link>
+                    }  
                 </nav>
-                <div className="circle"></div>
+                <div className="circle">
+                    <ion-icon name="cafe"></ion-icon>
+                </div>
             </div>
         </header>
         </Container>
@@ -68,7 +101,16 @@ const Container = styled.div`
         .navegation{
             display: none;
         }
-    }
+    .circle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ion-icon{
+            color: black;
+            font-size: 30px;
+        }
+    }    
+}
 
     @media (min-width: 800px){
         display: flex;

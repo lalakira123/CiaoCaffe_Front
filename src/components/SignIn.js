@@ -24,6 +24,7 @@ function SignIn() {
             localStorage.setItem('token', response.data);
             setLoading(false);
             navigate("/cart");
+            window.location.reload();
         });
         promise.catch((e) => {
             console.log(e.message);
