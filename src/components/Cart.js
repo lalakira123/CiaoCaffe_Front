@@ -15,7 +15,7 @@ const token = localStorage.getItem("token");
 
 function Cart() {
     
-    const {cart} = useContext(CartContext);
+    const {cart, setCart} = useContext(CartContext);
     const [validateToken, setValidateToken] = useState(false);
     const [total, setTotal] = useState(0);
     const [sale, setSale] = useState({
@@ -65,7 +65,7 @@ function Cart() {
             soma += Number(cart[i].realPrice)
         }
         setTotal(soma.toFixed(2));
-        setSale({...sale, total: soma.toFixed(2)})
+        setSale({...sale, cart: cart, total: soma.toFixed(2)})
     }, [cart]) 
 
     function postSale(e){
@@ -80,6 +80,7 @@ function Cart() {
                     text: 'Compra realizada com sucesso!'
                   })
                 navigate('/');
+                setCart([]);
             })
                 .catch(err => {
                     Swal.fire({
