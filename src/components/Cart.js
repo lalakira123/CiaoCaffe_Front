@@ -247,6 +247,7 @@ const Conteiner = styled.main`
         font-size: 24px;
         font-family: 'Ledger', serif;
         font-weight: 700;
+        margin-bottom: 20px;
     }
     h4{
         font-size:  25px;
