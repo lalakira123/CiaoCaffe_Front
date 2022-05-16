@@ -34,7 +34,8 @@ function Product() {
             type: infoProduct.type,
             price: infoProduct.price.$numberDecimal,
             realPrice: infoProduct.price.$numberDecimal,
-            quantity: 1
+            quantity: 1,
+            stored: infoProduct.stored
         }
         if(!produtoExiste){
             setCart([...cart, novoProduto]);

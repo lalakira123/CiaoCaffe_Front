@@ -118,7 +118,7 @@ function Cart() {
             <Division>
                 <Space>
                     {cart.map((product) => {
-                        const {image, name, type, price, realPrice, quantity} = product;
+                        const {image, name, type, price, realPrice, quantity, stored} = product;
                         return(
                             <CardProduct
                                 key={name}
@@ -128,6 +128,7 @@ function Cart() {
                                 price={price}
                                 realPrice={realPrice}
                                 quantity={quantity}
+                                stored={stored}
                                 />
                         );
                     })}
@@ -193,7 +194,7 @@ function Cart() {
                         :
                         <>
                             <button type='submit'>Pagar</button>
-                            <Link to={'/cart'}>
+                            <Link to={'/'}>
                                 <p>Adicionar mais itens</p>
                             </Link>
                         </>   

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CartContext from './../contexts/CartContext';
 
 function CardProduct(props) {
-    const {image, name, type, price, realPrice, quantity} = props;
+    const {image, name, type, price, realPrice, quantity, stored} = props;
     const [newQuantity, setNewQuantity] = useState(parseInt(quantity));
     const [newRealPrice, setRealPrice] = useState(realPrice);
     
@@ -29,7 +29,8 @@ function CardProduct(props) {
                     type,
                     price,
                     realPrice: newRealPrice,
-                    quantity: newQuantity
+                    quantity: newQuantity,
+                    stored
                 }
             } else{
                 return product;
@@ -41,8 +42,10 @@ function CardProduct(props) {
     },[newRealPrice])
 
     function quantityChangePlus() {
-        setNewQuantity(newQuantity + 1);
-        setRealPrice((parseFloat(newRealPrice) + parseFloat(price)).toFixed(2));
+        if(newQuantity < stored){
+            setNewQuantity(newQuantity + 1);
+            setRealPrice((parseFloat(newRealPrice) + parseFloat(price)).toFixed(2));
+        }
     }
 
     function quantityChangeMinus() {
