@@ -101,6 +101,7 @@ function Cart() {
             })
             navigate('/');
             setCart([]);
+            localStorage.setItem('cart', JSON.stringify([]));
         })
             .catch(err => {
                 Swal.fire({
