@@ -10,6 +10,7 @@ import CartContext from './../contexts/CartContext';
 import axios from 'axios';
 
 const POSTURL = 'https://ciao-caffe.herokuapp.com/sales';
+const PUTURL = 'https://ciao-caffe.herokuapp.com/products';
 
 const token = localStorage.getItem("token");
 
@@ -81,6 +82,13 @@ function Cart() {
                   })
                 navigate('/');
                 setCart([]);
+                axios.put(PUTURL, cart)
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(e => {
+                    console.log(e.message);
+                })
             })
                 .catch(err => {
                     Swal.fire({
