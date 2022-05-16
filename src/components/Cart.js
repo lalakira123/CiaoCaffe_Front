@@ -10,6 +10,7 @@ import CartContext from './../contexts/CartContext';
 import axios from 'axios';
 
 const POSTURL = 'https://ciao-caffe.herokuapp.com/sales';
+const PUTURL = 'https://ciao-caffe.herokuapp.com/products';
 
 const token = localStorage.getItem("token");
 
@@ -37,7 +38,6 @@ function Cart() {
                 axios.get(`https://viacep.com.br/ws/${sale.cep}/json/`)
                 .then(res => {
                     const {data} = res; 
-                    console.log(data)
                     setSale({...sale,
                         street: data.logradouro,
                         neighbourhood: data.bairro,
@@ -68,27 +68,19 @@ function Cart() {
         setSale({...sale, cart: cart, total: soma.toFixed(2)})
     }, [cart]) 
 
-    function postSale(e){
+    function putProduct(e){
         e.preventDefault();
         if(cart.length !== 0){
-            axios.post(POSTURL, sale, {headers: {
-                token
-            }}).then(res => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Ciao!',
-                    text: 'Compra realizada com sucesso!'
-                  })
-                navigate('/');
-                setCart([]);
+            const promise = axios.put(PUTURL, {cart: sale.cart})
+            promise.then(res => {
+                const produtoDisponivel = res.data;
+                console.log(res.data);
+                if(produtoDisponivel !== 'Produto indisponível no estoque'){
+                    postSales();
+                } else {
+                    alert('Quantidade de produtos indisponível!');
+                }
             })
-                .catch(err => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Não foi possível efetuar o pagamento!',
-                      })
-                })
         } else {
             Swal.fire({
                 icon: 'warning',
@@ -96,6 +88,27 @@ function Cart() {
                 text: 'Carrinho vazio!'
               })
         }
+    }
+
+    function postSales() {
+        axios.post(POSTURL, sale, {headers: {
+            token
+        }}).then(res => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Ciao!',
+                text: 'Compra realizada com sucesso!'
+            })
+            navigate('/');
+            setCart([]);
+        })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Não foi possível efetuar o pagamento!',
+                  })
+            })
     }
 
     return(
@@ -124,7 +137,7 @@ function Cart() {
                         <h1>Total</h1>
                         <h1>R${total}</h1>
                     </div>
-                    <form onSubmit={postSale}>
+                    <form onSubmit={putProduct}>
                         <input  
                             className='cep'
                             placeholder='CEP'
@@ -180,6 +193,9 @@ function Cart() {
                         :
                         <>
                             <button type='submit'>Pagar</button>
+                            <Link to={'/cart'}>
+                                <p>Adicionar mais itens</p>
+                            </Link>
                         </>   
                     }
                     </form>

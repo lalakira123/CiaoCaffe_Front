@@ -46,18 +46,28 @@ export default function Home(){
             <Container> 
                 <main>
                     {productsArray.map(product => {
-                        return(
-                            <Link to={`/product/${product._id}`} key={product._id}>
-                                <div className="product-box" >
+                        {
+                            return product.stored > 0 ?
+                                <Link to={`/product/${product._id}`} key={product._id}>
+                                    <div className="product-box" key={product._id}>
+                                        <img src={product.image} alt="product"/>
+                                        <h2>{product.name}</h2>
+                                        <div className="price-box">
+                                            <p>R${product.price.$numberDecimal}</p>
+                                            <div className="plus">+</div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            :
+                                <div className="product-box" key={product._id}>
                                     <img src={product.image} alt="product"/>
                                     <h2>{product.name}</h2>
                                     <div className="price-box">
-                                        <p>R${product.price.$numberDecimal}</p>
-                                        <div className="plus">+</div>
+                                        <p>Produto Indisponível</p>
                                     </div>
                                 </div>
-                            </Link>
-                        )
+                        }
+            
                     })}
                 </main>
             </Container>

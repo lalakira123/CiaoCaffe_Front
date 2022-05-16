@@ -43,7 +43,7 @@ function Product() {
         navigate('/cart');
     }
 
-    const {name, type, image, price, description} = infoProduct;
+    const {name, type, image, price, description, stored} = infoProduct;
 
     return !loading ?(
         <>
@@ -56,7 +56,10 @@ function Product() {
             </div>
             <Details>
                 <Type>{type}</Type>
-                <Name>{name}</Name>
+                <InfoTop>
+                    <Name>{name}</Name>
+                    <Storage>Estoque: x{stored}</Storage>
+                </InfoTop>
                 <Description>{description}</Description>
                 <Buy>
                     <Price>
@@ -147,8 +150,19 @@ const Type = styled.p`
     margin-bottom: 13px;
 `
 
+const InfoTop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 343px;
+`
+
 const Name = styled.p`
     margin-bottom: 13px;
+`
+
+const Storage = styled.p`
+    font-size: 16px;
+    font-weight: 700;
 `
 
 const Description = styled.p`
